@@ -136,13 +136,27 @@ body {
   justify-content: center;
   transition: all 0.2s;
 }
-.option.selected .radio-dot { border-color: var(--accent); }
+.option.selected .radio-dot { border-color: var(--accent); background: var(--accent); }
 .option.selected .radio-dot::after {
-  content: '';
-  width: 10px;
-  height: 10px;
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Checkbox style for multi-select */
+[data-multi="true"] .radio-dot {
+  border-radius: 5px;
+}
+[data-multi="true"] .option.selected .radio-dot {
+  border-color: var(--accent);
   background: var(--accent);
-  border-radius: 50%;
+}
+[data-multi="true"] .option.selected .radio-dot::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .textarea-wrap textarea {
