@@ -480,6 +480,19 @@ function submitForm() {
 
   const timestamp = new Date().toISOString();
   const entry = { timestamp, ...answers };
+
+  // Send to Google Sheets via Apps Script
+  const scriptUrl = localStorage.getItem('feedback_script_url');
+  if (scriptUrl) {
+    fetch(scriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    }).catch(() => {});
+  }
+
+  // Also save locally + clipboard as backup
   let list = JSON.parse(localStorage.getItem('report_feedback') || '[]');
   list.push(entry);
   localStorage.setItem('report_feedback', JSON.stringify(list));
