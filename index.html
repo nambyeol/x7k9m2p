@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부스트랩 × 마이다스PE — 다면화 전략 리포트</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --surface3: #222233;
+  --border: #2a2a3d;
+  --text: #e8e8f0;
+  --text-dim: #8888a0;
+  --text-muted: #555570;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --red: #ef4444;
+  --red-dim: #dc26261a;
+  --green: #22c55e;
+  --green-dim: #16a34a1a;
+  --yellow: #eab308;
+  --yellow-dim: #ca8a041a;
+  --blue: #3b82f6;
+  --blue-dim: #2563eb1a;
+  --orange: #f97316;
+  --purple: #a855f7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 120px;
+}
+
+/* Header */
+.hero {
+  text-align: center;
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--accent);
+  color: white;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #e8e8f0, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero .subtitle {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+/* Section */
+.section {
+  margin-bottom: 64px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 28px; }
+}
+
+/* Stat Card */
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+}
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.stat-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.badge-green { background: var(--green-dim); color: var(--green); }
+.badge-red { background: var(--red-dim); color: var(--red); }
+.badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
+.badge-blue { background: var(--blue-dim); color: var(--blue); }
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--surface2);
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surface2); }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.tl-dot {
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface3);
+  border: 2px solid var(--accent);
+}
+.tl-dot.active { background: var(--accent); }
+.tl-dot.warning { border-color: var(--yellow); }
+.tl-dot.danger { border-color: var(--red); background: var(--red); }
+.tl-date {
+  font-size: 12px;
+  color: var(--accent-light);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.tl-title { font-weight: 600; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-dim); }
+.tl-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* Diagram Box */
+.diagram {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+/* Flow */
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.flow-box {
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+}
+.flow-arrow {
+  color: var(--text-muted);
+  font-size: 20px;
+}
+
+/* Bar Chart */
+.bar-chart { margin: 20px 0; }
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+.bar-label {
+  width: 60px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
+}
+.bar-track {
+  flex: 1;
+  height: 32px;
+  background: var(--surface2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  transition: width 0.3s;
+}
+
+/* Gauge */
+.gauge-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+}
+.gauge-bar {
+  flex: 1;
+  height: 12px;
+  background: var(--surface2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.gauge-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s;
+}
+
+/* Alert Box */
+.alert {
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+}
+.alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.alert-red { background: var(--red-dim); border: 1px solid #dc262633; }
+.alert-yellow { background: var(--yellow-dim); border: 1px solid #ca8a0433; }
+.alert-green { background: var(--green-dim); border: 1px solid #16a34a33; }
+.alert-blue { background: var(--blue-dim); border: 1px solid #2563eb33; }
+
+/* Tag */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.tag-confirmed { background: var(--green-dim); color: var(--green); }
+.tag-estimated { background: var(--yellow-dim); color: var(--yellow); }
+.tag-unknown { background: var(--red-dim); color: var(--red); }
+
+/* Checklist */
+.checklist { list-style: none; }
+.checklist li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.check-box.priority { border-color: var(--red); }
+
+/* Decision Tree */
+.tree { padding-left: 20px; }
+.tree-node {
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-left: 3px solid var(--accent);
+  background: var(--surface2);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+}
+.tree-node.win { border-left-color: var(--green); }
+.tree-node.danger { border-left-color: var(--red); }
+.tree-node.warning { border-left-color: var(--yellow); }
+.tree-branch {
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 4px 0 4px 16px;
+}
+
+/* Quote */
+.quote {
+  border-left: 3px solid var(--accent);
+  padding: 16px 24px;
+  margin: 20px 0;
+  background: var(--surface2);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+/* Nav */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-title { font-weight: 700; font-size: 14px; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--surface2); color: var(--text); }
+
+.spacer { height: 60px; }
+
+/* Versus */
+.vs-container { display: flex; gap: 20px; align-items: stretch; }
+.vs-box { flex: 1; padding: 24px; border-radius: 14px; }
+.vs-left { background: var(--green-dim); border: 1px solid #16a34a33; }
+.vs-right { background: var(--red-dim); border: 1px solid #dc262633; }
+.vs-divider {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-muted);
+}
+
+/* Pill */
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pill {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--surface3);
+  border: 1px solid var(--border);
+}
+
+/* Footer */
+.footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 2;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-title">BOOSTLAB vs MIDAS PE</span>
+  <div class="nav-links">
+    <a href="#part0">개요</a>
+    <a href="#part1">법률</a>
+    <a href="#part2">재무</a>
+    <a href="#part3">시간</a>
+    <a href="#part4">게임이론</a>
+    <a href="#part5">여론</a>
+    <a href="#part6">심리</a>
+    <a href="#part7">업계</a>
+    <a href="#part8">전략</a>
+  </div>
+</nav>
+
+<div class="spacer"></div>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">CONFIDENTIAL STRATEGY REPORT</div>
+  <h1>부스트랩 × 마이다스PE<br>다면화 전략 리포트</h1>
+  <p class="subtitle">부스트랩 추형재 대표가 사모펀드와의 분쟁에서 다각도로 사건을 조망하고 최적의 전략을 수립하기 위한 관점별 인사이트</p>
+  <div class="hero-meta">
+    <span>2026.04.13</span>
+    <span>|</span>
+    <span>8개 관점 분석</span>
+    <span>|</span>
+    <span>35개 팩트 검증</span>
+    <span>|</span>
+    <span>12단계 킬체인</span>
+  </div>
+</div>
+
+<!-- PART 0 -->
+<div class="section" id="part0">
+  <div class="section-header">
+    <div class="section-num">0</div>
+    <div>
+      <div class="section-title">사건 개요</div>
+      <div class="section-sub">60초 브리핑 — 타임라인, 이해관계자, 핵심 수치</div>
+    </div>
+  </div>
+
+  <!-- Key Stats -->
+  <div class="grid-4" style="margin-bottom:28px">
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--accent)">300억</div>
+      <div class="stat-label">부스트랩 인수가 (경영권 포함)</div>
+      <div class="stat-badge badge-green">CONFIRMED</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--yellow)">50%+</div>
+      <div class="stat-label">PE 확보 지분율</div>
+      <div class="stat-badge badge-yellow">ESTIMATED</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--red)">7억</div>
+      <div class="stat-label">매각 자문료 (MMP/김규현)</div>
+      <div class="stat-badge badge-yellow">UNVERIFIED</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--green)">~1,000억</div>
+      <div class="stat-label">2024 추정 매출</div>
+      <div class="stat-badge badge-yellow">ESTIMATED</div>
+    </div>
+  </div>
+
+  <!-- Stakeholder Map -->
+  <div class="card">
+    <div class="card-title">이해관계자 맵</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <!-- LP -->
+      <div style="text-align:center">
+        <div class="flow-box" style="background:var(--surface3);display:inline-block">
+          <div style="font-size:12px;color:var(--text-muted)">LP (출자자)</div>
+          <div style="font-weight:700">산업은행 · 한국성장금융 · 기타</div>
+        </div>
+      </div>
+      <div style="text-align:center;color:var(--text-muted)">돈 출자 ↓</div>
+      <!-- GP -->
+      <div style="text-align:center">
+        <div class="flow-box" style="background:var(--accent);color:white;display:inline-block;padding:16px 32px">
+          <div style="font-size:12px;opacity:0.8">GP / 운용사</div>
+          <div style="font-size:18px;font-weight:800">마이다스PE</div>
+          <div style="font-size:12px;opacity:0.8">대표 임춘수 | 설립 2018.08</div>
+        </div>
+      </div>
+      <!-- Arrows -->
+      <div style="display:flex;justify-content:center;gap:120px;color:var(--text-muted);font-size:13px;">
+        <span>700억 ↓</span>
+        <span>300억 ↓</span>
+      </div>
+      <!-- Portfolio -->
+      <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap">
+        <div class="flow-box" style="background:var(--surface3);border:1px solid var(--border)">
+          <div style="font-size:12px;color:var(--text-muted)">플랫폼</div>
+          <div style="font-weight:700">미래아이엔씨</div>
+          <div style="font-size:12px;color:var(--text-muted)">디지털마케팅 | 2021.12 인수</div>
+        </div>
+        <div class="flow-box" style="background:var(--surface3);border:2px solid var(--red)">
+          <div style="font-size:12px;color:var(--red)">분쟁 대상</div>
+          <div style="font-weight:700">부스트랩</div>
+          <div style="font-size:12px;color:var(--text-muted)">D2C커머스 | 2022.07 인수</div>
+        </div>
+      </div>
+      <!-- Advisory -->
+      <div style="text-align:center;margin-top:8px">
+        <span style="color:var(--text-muted);font-size:13px">매각자문 7억 ↑</span>
+      </div>
+      <div style="text-align:center">
+        <div class="flow-box" style="background:var(--yellow-dim);border:1px solid #ca8a0433;display:inline-block">
+          <div style="font-size:12px;color:var(--yellow)">Sell-side Advisor</div>
+          <div style="font-weight:700">김규현 / MMP</div>
+          <div style="font-size:12px;color:var(--text-muted)">현재 추형재 카톡 차단 상태</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="card">
+    <div class="card-title">타임라인</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2018.07.19</div>
+        <div class="tl-title">추형재, (주)부스트랩 설립 <span class="tag tag-confirmed">CONFIRMED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2018.08</div>
+        <div class="tl-title">마이다스PE 설립 (대표 임춘수) <span class="tag tag-confirmed">CONFIRMED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2020.07~08</div>
+        <div class="tl-title">마이다스PE 1호 펀드 355억 결성 (산은 루키리그) <span class="tag tag-confirmed">CONFIRMED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2021.11.18</div>
+        <div class="tl-title">마이다스제8호 펀드 결성 (만기 2029.11.17) <span class="tag tag-confirmed">CONFIRMED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <div class="tl-date">2021.12</div>
+        <div class="tl-title">마이다스PE, 미래아이엔씨 700억 인수 (첫 바이아웃) <span class="tag tag-confirmed">CONFIRMED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2022.03.08</div>
+        <div class="tl-title">김규현, MMP 설립 (마일스톤에서 분사) <span class="tag tag-confirmed">CONFIRMED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <div class="tl-date">2022.07.08</div>
+        <div class="tl-title">부스트랩 인수 클로징. 경영권 포함 약 300억 <span class="tag tag-confirmed">CONFIRMED</span></div>
+        <div class="tl-desc">MMP(김규현) 매각자문. MMP 설립 4개월 만의 첫 딜.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warning"></div>
+        <div class="tl-date">2022 ~ 2025</div>
+        <div class="tl-title">대주주(PE) vs 대표(추형재) 경영 갈등 심화 <span class="tag tag-confirmed">CONFIRMED</span></div>
+        <div class="tl-desc">블라인드/잡플래닛 다수 직원 리뷰로 확인</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warning"></div>
+        <div class="tl-date">시점 미상</div>
+        <div class="tl-title">추형재 → 김규현 사후 문의 → 김규현 카톡 차단 <span class="tag tag-estimated">UNVERIFIED</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot danger"></div>
+        <div class="tl-date">2026 현재</div>
+        <div class="tl-title">추형재 인스타 폭로 + 터보832 출연 → PE 백기 <span class="tag tag-estimated">UNVERIFIED</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PART 1 -->
+<div class="section" id="part1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div>
+      <div class="section-title">법률 관점</div>
+      <div class="section-sub">"계약서에 뭐가 적혀있느냐가 전부다"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">SHA 핵심 조항별 공격/방어 시나리오</div>
+    <div class="alert alert-yellow" style="margin-bottom:20px">
+      <span class="alert-icon">&#9888;</span>
+      <div><strong>SHA 원문은 미확인 상태.</strong> 아래는 이 규모·유형의 딜에서 통상적으로 포함되는 조항 기반 분석입니다.</div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>조항</th><th>있으면 추형재에게</th><th>없으면 추형재에게</th><th>확인도</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700">우선매수권 (ROFR)</td>
+          <td style="color:var(--green)">PE 제3자 매각 시 가로챌 수 있음</td>
+          <td style="color:var(--yellow)">제3자 매각 구멍. 단 키맨리스크로 현실적 매수자 거의 없음</td>
+          <td><span style="color:var(--red);font-weight:700">&#128308; 최우선</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">드래그얼롱</td>
+          <td style="color:var(--red)">PE 매각 시 추형재 강제 동반매각</td>
+          <td style="color:var(--green)">추형재가 버틸 수 있음</td>
+          <td><span style="color:var(--red);font-weight:700">&#128308; 최우선</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">대표 해임 조건</td>
+          <td colspan="2" style="color:var(--text-dim)">특별결의? 이사회? 조건부? → 방어 수준 결정</td>
+          <td><span style="color:var(--red);font-weight:700">&#128308; 최우선</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">콜옵션 (PE→추형재)</td>
+          <td style="color:var(--red)">PE가 잔여지분 강제 매수 가능</td>
+          <td style="color:var(--green)">지분 보호</td>
+          <td><span style="color:var(--red);font-weight:700">&#128308; 최우선</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">태그얼롱</td>
+          <td style="color:var(--green)">PE와 같은 조건에 같이 팔 권리</td>
+          <td style="color:var(--text-dim)">중립</td>
+          <td><span style="color:var(--yellow)">&#128993;</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">동의권/거부권</td>
+          <td style="color:var(--red)">PE가 주요 경영에 거부권 행사</td>
+          <td style="color:var(--green)">추형재 단독 경영 가능</td>
+          <td><span style="color:var(--yellow)">&#128993;</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">경업금지</td>
+          <td style="color:var(--red)">나가더라도 D2C 사업 불가</td>
+          <td style="color:var(--green)">새 회사 설립 가능</td>
+          <td><span style="color:var(--yellow)">&#128993;</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">풋옵션 (추형재→PE)</td>
+          <td style="color:var(--green)">"내 지분 사라" 강제 가능</td>
+          <td style="color:var(--text-dim)">—</td>
+          <td><span style="color:var(--yellow)">&#128993;</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 김규현 두 가지 쟁점 -->
+  <div class="card" style="border-color: var(--yellow)">
+    <div class="card-title" style="color:var(--yellow)">김규현 자문사 책임 — 두 가지 쟁점</div>
+
+    <div style="background:var(--surface2);border-radius:12px;padding:24px;margin-bottom:16px">
+      <div style="font-weight:700;margin-bottom:12px;font-size:16px">쟁점 1: 계약에서 김규현의 자문에 문제가 있었는가?</div>
+      <table>
+        <tr><td style="width:180px;font-weight:600;color:var(--text-dim)">자문사의 의무</td><td>Sell-side advisor = 매도자의 이익 극대화. 단순 딜 성사가 아님</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">의심 근거</td><td>SHA에 매도자 보호 장치가 빈약할 경우 → 자문사가 클로징을 우선시했다는 증거</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">정황</td><td>MMP 2022.03 설립 → 2022.07 클로징. <strong>설립 4개월 만의 첫 딜.</strong> 트랙레코드 확보 압박</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">본인 발언과의 모순</td><td>"매수자가 실사로 괴롭히고 협상으로 시간 끄는 데 매도자가 맞서지 못하는 측면이 있었다" — 본인이 자문한 딜에서 바로 그 문제 발생</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">법적 실익</td><td>자문계약상 의무 범위에 따라 자문료 일부 반환 청구, 손해배상 가능성</td></tr>
+      </table>
+    </div>
+
+    <div style="background:var(--surface2);border-radius:12px;padding:24px">
+      <div style="font-weight:700;margin-bottom:12px;font-size:16px">쟁점 2: 컴플레인에 차단은 옳은 방법이었는가?</div>
+      <table>
+        <tr><td style="width:180px;font-weight:600;color:var(--text-dim)">업계 상식</td><td>7억 자문료를 받은 전문가가 클라이언트 사후 문의를 차단하는 것은 <strong>전례가 극히 드문 행위</strong></td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">CPA 윤리강령</td><td>한국공인회계사회: 의뢰인에 대한 성실의무. 계약 종료 후에도 합리적 응대 의무</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">자문계약</td><td>대부분 M&A 자문계약에 "사후 지원" 조항 포함. 해당 조항 유무 확인 필요</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">차단의 해석</td><td>(A) 자문 하자를 본인이 인지 — 추궁 회피<br>(B) PE 측과의 관계 보호<br>(C) 단순 개인 갈등<br><strong>어느 쪽이든 전문가로서 부적절</strong></td></tr>
+        <tr><td style="font-weight:600;color:var(--text-dim)">전략적 활용</td><td>"7억 받고 카톡 차단" 자체가 김규현 전문성·윤리성에 대한 강력한 의문 제기 카드</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon">&#9998;</span>
+    <div><strong>즉시 행동:</strong> ① SHA 원문 8개 조항 분석 ② 김규현 자문계약서에서 사후 지원 의무 확인 ③ 카톡 차단 스크린샷 + 연락 기록 보존 ④ 자문료 7억 이체 증빙 확보</div>
+  </div>
+</div>
+
+<!-- PART 2 -->
+<div class="section" id="part2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div>
+      <div class="section-title">재무 관점</div>
+      <div class="section-sub">"숫자가 말하는 진짜 힘의 균형"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">매출 성장 추이</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">2021</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:28%;background:var(--accent)">284억</div>
+        </div>
+        <span class="tag tag-confirmed">CONFIRMED</span>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2022</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:36%;background:var(--accent)">360억</div>
+        </div>
+        <span class="tag tag-confirmed">CONFIRMED</span>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2023</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:46%;background:var(--accent)">460억</div>
+        </div>
+        <span class="tag tag-confirmed">CONFIRMED</span>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2024</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:95%;background:linear-gradient(90deg,var(--accent),var(--purple))">~900-1,000억</div>
+        </div>
+        <span class="tag tag-estimated">ESTIMATED</span>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--text-muted)">* 2024년: 누적매출 2,340억에서 역산. 영업이익률 약 15% 유지 (공식 소개자료 기준)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">밸류에이션 변화</div>
+    <div class="grid-2">
+      <div style="background:var(--surface2);border-radius:12px;padding:24px;text-align:center">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">인수 시점 (2022.07)</div>
+        <div style="font-size:36px;font-weight:800;color:var(--text-dim)">~450억</div>
+        <div style="font-size:13px;color:var(--text-muted)">매출 360억 기준</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:12px;padding:24px;text-align:center">
+        <div style="font-size:13px;color:var(--accent-light);margin-bottom:8px">현재 추정 (2026.04)</div>
+        <div style="font-size:36px;font-weight:800;color:var(--accent-light)">675~1,050억</div>
+        <div style="font-size:13px;color:var(--text-muted)">EV/EBITDA 5~7x 적용</div>
+        <div class="stat-badge badge-yellow">ESTIMATED</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">바이백 가격 레인지 (PE 지분 60% 가정)</div>
+    <table>
+      <thead>
+        <tr><th>시나리오</th><th>기업가치</th><th>PE 지분가치</th><th>할인율</th><th style="color:var(--accent)">바이백 추정가</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag" style="background:var(--green-dim);color:var(--green)">PE 최약</span></td>
+          <td>675억</td><td>405억</td><td>40~50%</td>
+          <td style="font-weight:800;color:var(--green)">200~240억</td>
+        </tr>
+        <tr>
+          <td><span class="tag" style="background:var(--blue-dim);color:var(--blue)">현실적</span></td>
+          <td>840억</td><td>504억</td><td>30~40%</td>
+          <td style="font-weight:800;color:var(--blue)">300~350억</td>
+        </tr>
+        <tr>
+          <td><span class="tag" style="background:var(--red-dim);color:var(--red)">PE 강경</span></td>
+          <td>1,050억</td><td>630억</td><td>20~30%</td>
+          <td style="font-weight:800;color:var(--red)">440~500억</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;font-size:13px;color:var(--text-muted)">
+      <strong>할인 요소:</strong> 키맨 의존도 / 비상장 유동성 / 평판 훼손 / 펀드 만기 압박<br>
+      <strong>할인 약화 요소:</strong> 고성장 기업 / 펀드 만기 아직 3년+ 잔여
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">자금조달 옵션 비교</div>
+    <table>
+      <thead><tr><th>방법</th><th>추형재 부담</th><th>장점</th><th>단점</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700">전액 자기자금</td><td>200~350억</td><td>깔끔</td><td style="color:var(--red)">전 재산 소진</td></tr>
+        <tr><td style="font-weight:700">MBO + 차입</td><td>100~150억 + 대출</td><td>현실적</td><td>상환 부담</td></tr>
+        <tr><td style="font-weight:700;color:var(--green)">PE 교체 (새 투자자)</td><td style="color:var(--green);font-weight:700">0원</td><td>돈 안 씀</td><td>투자자 탐색 필요</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">부분 바이백 (과반만)</td><td style="color:var(--accent);font-weight:700">100~175억</td><td>가장 효율적</td><td>잔여지분 처리</td></tr>
+        <tr><td style="font-weight:700">자사주 매입</td><td>0원 (회사자금)</td><td>개인부담 없음</td><td>이사회 승인 필요</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon">&#9998;</span>
+    <div><strong>즉시 행동:</strong> 정확한 지분율 확인 → 바이백 가격 정밀 산출 가능</div>
+  </div>
+</div>
+
+<!-- PART 3 -->
+<div class="section" id="part3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div>
+      <div class="section-title">시간 관점</div>
+      <div class="section-sub">"시계는 누구 편인가"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">펀드 수명 구조 — 마이다스제8호 기준</div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin:16px 0">
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--blue-dim);border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700;color:var(--blue)">Year 1</div>
+        <div>2021~22</div>
+        <div style="color:var(--text-muted)">투자기간</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--blue-dim);border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700;color:var(--blue)">Year 2</div>
+        <div>2022~23</div>
+        <div style="color:var(--text-muted)">투자기간</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--blue-dim);border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700;color:var(--blue)">Year 3</div>
+        <div>2023~24</div>
+        <div style="color:var(--text-muted)">투자기간</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--blue-dim);border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700;color:var(--blue)">Year 4</div>
+        <div>2024~25</div>
+        <div style="color:var(--text-muted)">투자→회수</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--yellow-dim);border:2px solid var(--yellow);border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700;color:var(--yellow)">Year 5 ★</div>
+        <div>2025~26</div>
+        <div style="color:var(--yellow)">지금 여기</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--orange);color:white;border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700">Year 6</div>
+        <div>2026~27</div>
+        <div>엑시트 압박</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:var(--red);color:white;border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700">Year 7</div>
+        <div>2027~28</div>
+        <div>급매 구간</div>
+      </div>
+      <div style="flex:1;min-width:100px;padding:16px;background:#7f1d1d;color:white;border-radius:8px;text-align:center;font-size:12px">
+        <div style="font-weight:700">Year 8</div>
+        <div>2028~29</div>
+        <div>만기 종료</div>
+      </div>
+    </div>
+
+    <div class="alert alert-yellow" style="margin-top:16px">
+      <span class="alert-icon">&#9888;</span>
+      <div><strong>만기 3.5년이지만 "편하게 엑시트할 시간"은 1~2년.</strong> 2027년 후반부터는 급매 압박. PE는 지금부터 본격 엑시트를 추진해야 하는 시점입니다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">시간에 따른 협상력 변화</div>
+    <div style="margin:20px 0">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:4px">
+        <span>추형재 협상력</span>
+        <span>2026 ──────────────────────────── 2029</span>
+      </div>
+      <div style="height:24px;background:var(--surface2);border-radius:6px;overflow:hidden;margin-bottom:12px">
+        <div style="height:100%;width:85%;background:linear-gradient(90deg,var(--green),#16a34a);border-radius:6px;display:flex;align-items:center;padding-left:12px;font-size:12px;font-weight:700">상승 &#8599;</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:4px">
+        <span>PE 협상력</span>
+      </div>
+      <div style="height:24px;background:var(--surface2);border-radius:6px;overflow:hidden">
+        <div style="height:100%;width:85%;background:linear-gradient(90deg,var(--red),#7f1d1d);border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:12px;font-weight:700">하락 &#8600;</div>
+      </div>
+    </div>
+    <div class="quote">시간은 추형재 편이지만, "내일 이긴다"가 아니라 "1~2년 안에 유리해진다"가 정확한 표현.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon">&#9998;</span>
+    <div><strong>즉시 행동:</strong> 마이다스제8호 펀드가 부스트랩 투자 집행 펀드인지 확인. 정확한 만기 파악이 시간 전략의 기초.</div>
+  </div>
+</div>
+
+<!-- PART 4 -->
+<div class="section" id="part4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div>
+      <div class="section-title">게임이론 관점</div>
+      <div class="section-sub">"상대가 뭘 해도 내가 이기는 구조"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">PE의 엑시트 옵션 — 전부 막히는 구조</div>
+    <div class="grid-2">
+      <div style="background:var(--red-dim);border:1px solid #dc262633;border-radius:12px;padding:20px">
+        <div style="font-weight:700;margin-bottom:8px">옵션 A: IPO</div>
+        <div style="font-size:13px;color:var(--text-dim)">대표이사 전면 협조 필수<br>추형재 비협조 → IPO 불가</div>
+        <div style="margin-top:12px;font-weight:700;color:var(--red)">&#10060; 막힘</div>
+      </div>
+      <div style="background:var(--red-dim);border:1px solid #dc262633;border-radius:12px;padding:20px">
+        <div style="font-weight:700;margin-bottom:8px">옵션 B: 제3자 매각</div>
+        <div style="font-size:13px;color:var(--text-dim)">CEO 적대적 → 매수자 없음<br>폭로로 평판 이미 훼손</div>
+        <div style="margin-top:12px;font-weight:700;color:var(--red)">&#10060; 현실적 불가</div>
+      </div>
+      <div style="background:var(--red-dim);border:1px solid #dc262633;border-radius:12px;padding:20px">
+        <div style="font-weight:700;margin-bottom:8px">옵션 C: 배당 회수</div>
+        <div style="font-size:13px;color:var(--text-dim)">이사회/주총 결의 필요<br>추형재 반대 가능</div>
+        <div style="margin-top:12px;font-weight:700;color:var(--red)">&#10060; 자충수</div>
+      </div>
+      <div style="background:var(--red-dim);border:1px solid #dc262633;border-radius:12px;padding:20px">
+        <div style="font-weight:700;margin-bottom:8px">옵션 D: 대표 교체</div>
+        <div style="font-size:13px;color:var(--text-dim)">핵심인력 이탈 → 기업가치 폭락<br>빈 껍데기만 남음</div>
+        <div style="margin-top:12px;font-weight:700;color:var(--red)">&#10060; 파이로스의 승리</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">내쉬 균형 분석</div>
+    <table>
+      <thead><tr><th></th><th style="text-align:center">PE: 협상(양보)</th><th style="text-align:center">PE: 강경(대립)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700">추형재: 협상</td>
+          <td style="text-align:center;background:var(--green-dim)"><strong style="color:var(--green)">유리한 합의</strong><br><span style="font-size:12px;color:var(--text-dim)">PE: 원금 회수 수준</span></td>
+          <td style="text-align:center;background:var(--blue-dim)"><strong style="color:var(--blue)">시간 끌기로 전환</strong><br><span style="font-size:12px;color:var(--text-dim)">PE: 비용만 증가</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">추형재: 강경</td>
+          <td style="text-align:center;background:var(--green-dim)"><strong style="color:var(--green)">압도적 유리</strong><br><span style="font-size:12px;color:var(--text-dim)">PE: 대폭 양보</span></td>
+          <td style="text-align:center;background:var(--blue-dim)"><strong style="color:var(--blue)">소모전이지만 유리</strong><br><span style="font-size:12px;color:var(--text-dim)">시간이 편이라</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="quote" style="margin-top:16px">추형재는 어떤 칸에서든 손해가 없음 (우월전략). PE의 유일한 합리적 선택은 "양보".</div>
+  </div>
+
+  <div class="alert alert-green">
+    <span class="alert-icon">&#10003;</span>
+    <div><strong>최적 전략:</strong> 성실 경영 + 느린 대응 + 먼저 제안 안 하기. 이 세 가지 중 실패할 수 있는 것은 하나도 없다.</div>
+  </div>
+</div>
+
+<!-- PART 5 -->
+<div class="section" id="part5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div>
+      <div class="section-title">여론/미디어 관점</div>
+      <div class="section-sub">"이 싸움의 진짜 전장"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">포지셔닝 전환이 필요하다</div>
+    <div class="vs-container">
+      <div class="vs-box vs-right">
+        <div style="font-weight:700;margin-bottom:12px;color:var(--red)">&#10060; 현재: 분노한 창업자</div>
+        <ul style="font-size:13px;color:var(--text-dim);padding-left:16px;line-height:2">
+          <li>감정적 폭로</li>
+          <li>개인 공격</li>
+          <li>동정은 받지만 시간이 지나면 잊힘</li>
+          <li>법적 리스크 (명예훼손 등)</li>
+        </ul>
+      </div>
+      <div class="vs-divider">&#8594;</div>
+      <div class="vs-box vs-left">
+        <div style="font-weight:700;margin-bottom:12px;color:var(--green)">&#10004; 목표: 교훈을 주는 창업자</div>
+        <ul style="font-size:13px;color:var(--text-dim);padding-left:16px;line-height:2">
+          <li>구조적 문제 지적</li>
+          <li>업계 시스템 비판</li>
+          <li>존경을 받고 레퍼런스됨</li>
+          <li>법적으로 안전 (사실 기반)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">톤 전환 가이드</div>
+    <table>
+      <thead><tr><th style="color:var(--red)">&#10060; 이렇게 말하면 안 됨</th><th style="color:var(--green)">&#10004; 이렇게 전환</th></tr></thead>
+      <tbody>
+        <tr><td>"걔네가 이런 짓을 했다"</td><td>"PE가 창업자 회사를 인수할 때 이런 구조적 문제가 발생한다"</td></tr>
+        <tr><td>"김규현이 나를 배신했다"</td><td>"M&A 자문사가 매도자를 보호하지 못하는 현실"</td></tr>
+        <tr><td>분노, 개인 감정</td><td>분석, 업계를 위한 교훈</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">LP 압박 경로</div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0">
+      <div class="flow-box" style="background:var(--surface3)">인스타/유튜브 콘텐츠</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-box" style="background:var(--surface3)">업계 관계자 공유</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-box" style="background:var(--surface3)">LP 담당자 귀에 도달</div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-box" style="background:var(--red-dim);border:1px solid #dc262633">PE 내부 압박</div>
+    </div>
+    <div style="font-size:13px;color:var(--text-muted)">직접 LP 접근은 법적 리스크. 간접 경로(콘텐츠)로 자연스럽게 도달시키는 것이 안전.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon">&#9998;</span>
+    <div><strong>즉시 행동:</strong> 인스타/미디어 톤을 "감정 → 구조 분석"으로 전환. 추가 폭로는 협상 카드로 보관.</div>
+  </div>
+</div>
+
+<!-- PART 6 -->
+<div class="section" id="part6">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div>
+      <div class="section-title">심리/관계 관점</div>
+      <div class="section-sub">"사람을 읽어야 판이 보인다"</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">임춘수 (마이다스PE 대표)</div>
+      <table>
+        <tr><td style="width:80px;font-weight:600;color:var(--text-muted)">경력</td><td>골드만삭스 → 삼성증권 → 한투 부사장</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-muted)">성향</td><td>평판 중시. 스캔들 극도 기피</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-muted)">PE 규모</td><td>중소형. 한 건의 실패가 치명적</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-muted)">이해관계</td><td>Carry(성과보수) = 수익의 ~20%</td></tr>
+      </table>
+      <div class="alert alert-yellow" style="margin-top:12px;margin-bottom:0">
+        <span class="alert-icon">&#128161;</span>
+        <div style="font-size:13px">부스트랩 건은 "하나의 포트폴리오"가 아니라 <strong>커리어를 건 프로젝트</strong>. 이걸 말아먹으면 PE 업계 평판 종료.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">김규현 (MMP 대표)</div>
+      <table>
+        <tr><td style="width:80px;font-weight:600;color:var(--text-muted)">외부</td><td>"매도자의 편" "정직한 중개" 브랜딩</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-muted)">내면</td><td>첫 딜 클라이언트와 파탄</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-muted)">약점</td><td>MMP 3년차. 평판 = 생명줄</td></tr>
+        <tr><td style="font-weight:600;color:var(--text-muted)">공포</td><td>"7억 받고 차단" 헤드라인</td></tr>
+      </table>
+      <div class="alert alert-green" style="margin-top:12px;margin-bottom:0">
+        <span class="alert-icon">&#128161;</span>
+        <div style="font-size:13px"><strong>경로 A (권장):</strong> "도와주면 이름 안 꺼낸다" → PE 약점 정보 획득<br><strong>경로 B (대안):</strong> 압박 카드로 전환</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="color:var(--yellow)">&#9888; 추형재 본인의 감정 리스크 관리</div>
+    <table>
+      <thead><tr><th>감정</th><th>위험</th><th>대응</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700">분노</td><td>충동적 소송, 과격한 폭로</td><td>큰 결정은 24시간 쿨다운 후</td></tr>
+        <tr><td style="font-weight:700">조급함</td><td>"빨리 끝내고 싶다" → PE가 노리는 것</td><td>느린 게 이기는 것</td></tr>
+        <tr><td style="font-weight:700">복수심</td><td>김규현·PE 동시 적대 → 전선 분산</td><td>PE 먼저, 김규현 나중</td></tr>
+        <tr><td style="font-weight:700">자기의심</td><td>"판 게 실수였나" → 수세적 협상</td><td>판 건 과거. 앞으로의 구조에 집중</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PART 7 -->
+<div class="section" id="part7">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div>
+      <div class="section-title">업계/생태계 관점</div>
+      <div class="section-sub">"이 사건이 만드는 파급 효과"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">한국 PE-창업자 분쟁 선례</div>
+    <table>
+      <thead><tr><th>사건</th><th>구조</th><th>결과</th><th>시사점</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700">하이브 vs 민희진</td>
+          <td>대기업 vs 자회사 대표</td>
+          <td>민희진 해임</td>
+          <td style="color:var(--text-dim)">대기업 구조 ≠ PE 구조</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">MBK vs 고려아연</td>
+          <td>PE vs 상장 대기업</td>
+          <td>진행 중</td>
+          <td style="color:var(--text-dim)">여론전 패턴 참고 가능</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">어피너티 vs 락앤락</td>
+          <td>PE의 포괄적 주식교환 → 상폐</td>
+          <td>법원 "절차 문제없다"</td>
+          <td style="color:var(--red)">법정에서 PE 이길 수 있음을 시사</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="quote">법정에서 PE를 이기기는 어렵다. 법정 밖(여론·시간·구조)에서 이기는 전략이 현실적.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">이 싸움의 결말이 갖는 의미</div>
+    <div class="grid-2">
+      <div style="background:var(--green-dim);border:1px solid #16a34a33;border-radius:12px;padding:20px">
+        <div style="font-weight:700;color:var(--green);margin-bottom:8px">승리 시</div>
+        <ul style="font-size:13px;line-height:2;padding-left:16px;color:var(--text-dim)">
+          <li>창업자가 PE에 맞서 이긴 <strong>최초의 공개 사례</strong></li>
+          <li>향후 SHA 조건이 매도자에게 유리해지는 선례</li>
+          <li>추형재 = "스타트업 생태계의 수호자"</li>
+          <li>다음 사업에서 투자자·인재·고객 자동 유입</li>
+        </ul>
+      </div>
+      <div style="background:var(--red-dim);border:1px solid #dc262633;border-radius:12px;padding:20px">
+        <div style="font-weight:700;color:var(--red);margin-bottom:8px">실패 시</div>
+        <ul style="font-size:13px;line-height:2;padding-left:16px;color:var(--text-dim)">
+          <li>"폭로했는데 PE가 이겼다" → PE 위력 증명</li>
+          <li>추형재 다음 사업 신뢰도 하락</li>
+          <li>다른 창업자들에게 "싸워봤자 소용없다" 메시지</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-red" style="margin-top:16px">
+      <span class="alert-icon">&#9888;</span>
+      <div><strong>중간은 없다.</strong> 시작한 이상 반드시 이겨야 한다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PART 8 -->
+<div class="section" id="part8">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div>
+      <div class="section-title">종합 전략</div>
+      <div class="section-sub">의사결정 트리 + 12단계 킬체인 + 체크리스트</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">SHA 확인 결과에 따른 분기</div>
+    <div class="tree">
+      <div style="font-weight:700;margin-bottom:8px">SHA 정밀 분석 결과</div>
+      <div class="tree-branch">├── 우선매수권(ROFR) 있음</div>
+      <div class="tree-node win" style="margin-left:40px">+ 드래그얼롱 없음 → ★ 최상의 위치. 버티기 전략 100% 유효</div>
+      <div class="tree-node warning" style="margin-left:40px">+ 드래그얼롱 있음 → PE 제3자 매각 시 강제 동반. 조건 확인 필요</div>
+      <div class="tree-branch">├── 우선매수권(ROFR) 없음</div>
+      <div class="tree-node warning" style="margin-left:40px">+ 드래그얼롱 없음 → 구멍 있지만 키맨리스크로 현실적 봉쇄</div>
+      <div class="tree-node danger" style="margin-left:40px">+ 드래그얼롱 있음 → 가장 약한 위치. 적극적 협상 필요</div>
+      <div class="tree-branch">└── 콜옵션(PE→추형재) 있음</div>
+      <div class="tree-node danger" style="margin-left:40px">PE가 잔여지분 강제 매수 가능. 즉시 변호사 대응 필요</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">12단계 마이크로 킬체인</div>
+    <table>
+      <thead><tr><th style="width:50px">#</th><th>행동</th><th style="width:100px">기간</th><th style="width:80px">위험도</th></tr></thead>
+      <tbody>
+        <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent)">Phase 1: 정보 장악</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">1</td><td>SHA/SPA 전문 정밀 분석 (8개 핵심 조항)</td><td>1~2주</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">2</td><td>펀드 만기·LP 구성·PE 내부 사정 파악</td><td>1~2주</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent)">Phase 2: 출구 봉쇄</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">3</td><td>IPO 비협조 (아무것도 안 하면 됨)</td><td>상시</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">4</td><td>제3자 매각 봉쇄 (존재 자체가 봉쇄)</td><td>상시</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">5</td><td>배당 회수 견제 (이사회 반대권 행사)</td><td>필요시</td><td><span style="color:var(--yellow)">낮음</span></td></tr>
+        <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent)">Phase 3: 가치 강화</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">6</td><td>회사를 더 잘 경영 (매출·이익 성장)</td><td>1~12개월</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">7</td><td>핵심 인재를 내 편으로 (리더십 강화)</td><td>1~6개월</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent)">Phase 4: 시간 소모</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">8</td><td>PE 제안에 "검토 중" 반복. 30일 단위</td><td>3~12개월</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">9</td><td>PE 내부 분열 자연 발생 대기</td><td>자동</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td colspan="4" style="background:var(--surface2);font-weight:700;color:var(--accent)">Phase 5: 마무리</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">10</td><td>PE가 먼저 바이백/합의 제안하게 대기</td><td>6~18개월</td><td><span style="color:var(--green)">제로</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">11</td><td>가격 협상 (추형재가 부르는 값)</td><td>1~3개월</td><td><span style="color:var(--yellow)">낮음</span></td></tr>
+        <tr><td style="font-weight:700;color:var(--accent)">12</td><td>클로징</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="color:var(--red)">&#9744; 즉시 행동 체크리스트</div>
+    <div style="margin-bottom:16px">
+      <div style="font-weight:700;color:var(--red);margin-bottom:8px;font-size:13px">1순위 — 이번 주</div>
+      <ul class="checklist">
+        <li><div class="check-box priority"></div>SHA/SPA 원문을 변호사와 8개 핵심 조항 기준 분석</li>
+        <li><div class="check-box priority"></div>김규현 관련 모든 기록 보존 (자문계약서, 카톡, 이체내역, 차단 캡쳐)</li>
+        <li><div class="check-box priority"></div>이사회 구성 현황 정리 (PE측 vs 내 쪽)</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-weight:700;color:var(--yellow);margin-bottom:8px;font-size:13px">2순위 — 2주 내</div>
+      <ul class="checklist">
+        <li><div class="check-box"></div>마이다스제8호 펀드 LP 구성 확인</li>
+        <li><div class="check-box"></div>PE의 2호 펀드 레이징 여부 확인</li>
+        <li><div class="check-box"></div>변호사에게 드래그얼롱 발동 조건 정밀 검토 의뢰</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-weight:700;color:var(--blue);margin-bottom:8px;font-size:13px">3순위 — 1개월 내</div>
+      <ul class="checklist">
+        <li><div class="check-box"></div>인스타/미디어 톤 전환: "분노" → "구조적 문제 분석"</li>
+        <li><div class="check-box"></div>김규현에게 협력 제안 (경로 A) 시도</li>
+        <li><div class="check-box"></div>회사 경영 성과 가시화 (해외 확장, 신규 브랜드)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;color:var(--red);margin-bottom:8px;font-size:13px">&#10060; 하지 말 것</div>
+      <ul class="checklist">
+        <li><div class="check-box" style="border-color:var(--red);background:var(--red-dim)"></div><span style="color:var(--red)">바이백을 먼저 제안하지 않는다</span></li>
+        <li><div class="check-box" style="border-color:var(--red);background:var(--red-dim)"></div><span style="color:var(--red)">PE와 김규현을 동시에 적으로 삼지 않는다</span></li>
+        <li><div class="check-box" style="border-color:var(--red);background:var(--red-dim)"></div><span style="color:var(--red)">조급하게 합의하지 않는다</span></li>
+        <li><div class="check-box" style="border-color:var(--red);background:var(--red-dim)"></div><span style="color:var(--red)">감정적 폭로를 추가하지 않는다</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:16px;padding:40px;text-align:center;margin-top:32px">
+    <div style="font-size:14px;opacity:0.8;margin-bottom:12px">한 문장 요약</div>
+    <div style="font-size:22px;font-weight:700;line-height:1.5">"회사를 잘 경영하고, 아무 제안도 먼저 하지 않고,<br>시간이 흐르게 둔다.<br>이 세 가지 중 실패할 수 있는 것은 하나도 없다."</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>BOOSTLAB × MIDAS PE — MULTI-PERSPECTIVE STRATEGY REPORT</div>
+  <div>작성일 2026.04.13 | ✅ CONFIRMED = 2건 이상 독립 출처 확인 | ⚠️ ESTIMATED = 정황 추정 | ❌ UNVERIFIED = 미확인</div>
+  <div>본 리포트는 법률 자문이 아닙니다. 구체적 법적 행동 전 반드시 변호사 자문을 받으시기 바랍니다.</div>
+  <div style="margin-top:16px;font-size:11px;color:var(--text-muted)">
+    Sources: Campaign Asia | 더벨 | 한국경제TV | 딜사이트 | THE VC | 이코노미조선 | 이투데이 | MMP 공식 | 잡플래닛 | 블라인드
+  </div>
+</div>
+
+</div>
+</body>
+</html>
