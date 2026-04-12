@@ -55,6 +55,23 @@ body {
   line-height: 1.8;
 }
 
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 40px 0 28px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-light);
+  letter-spacing: 1px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
 .question {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -72,16 +89,16 @@ body {
 .q-title {
   font-size: 17px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   line-height: 1.5;
 }
 .q-subtitle {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 16px;
+  line-height: 1.6;
 }
 
-/* Radio Options */
 .options {
   display: flex;
   flex-direction: column;
@@ -107,9 +124,7 @@ body {
   border-color: var(--accent);
   background: rgba(99, 102, 241, 0.1);
 }
-.option input[type="radio"] {
-  display: none;
-}
+.option input[type="radio"] { display: none; }
 .radio-dot {
   width: 20px;
   height: 20px;
@@ -121,9 +136,7 @@ body {
   justify-content: center;
   transition: all 0.2s;
 }
-.option.selected .radio-dot {
-  border-color: var(--accent);
-}
+.option.selected .radio-dot { border-color: var(--accent); }
 .option.selected .radio-dot::after {
   content: '';
   width: 10px;
@@ -132,10 +145,6 @@ body {
   border-radius: 50%;
 }
 
-/* Textarea */
-.textarea-wrap {
-  margin-top: 4px;
-}
 .textarea-wrap textarea {
   width: 100%;
   min-height: 140px;
@@ -151,14 +160,9 @@ body {
   outline: none;
   transition: border-color 0.2s;
 }
-.textarea-wrap textarea::placeholder {
-  color: var(--text-muted);
-}
-.textarea-wrap textarea:focus {
-  border-color: var(--accent);
-}
+.textarea-wrap textarea::placeholder { color: var(--text-muted); }
+.textarea-wrap textarea:focus { border-color: var(--accent); }
 
-/* Submit */
 .submit-btn {
   width: 100%;
   padding: 18px;
@@ -173,28 +177,13 @@ body {
   transition: all 0.2s;
   margin-top: 32px;
 }
-.submit-btn:hover {
-  background: var(--accent-light);
-  transform: translateY(-1px);
-}
-.submit-btn:active {
-  transform: translateY(0);
-}
-.submit-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-}
+.submit-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+.submit-btn:active { transform: translateY(0); }
 
-/* Thank you */
 .thankyou {
   display: none;
   text-align: center;
   padding: 80px 24px;
-}
-.thankyou .icon {
-  font-size: 48px;
-  margin-bottom: 24px;
 }
 .thankyou h2 {
   font-size: 24px;
@@ -218,10 +207,7 @@ body {
   font-size: 14px;
   transition: all 0.2s;
 }
-.back-link:hover {
-  border-color: var(--accent);
-  color: var(--text);
-}
+.back-link:hover { border-color: var(--accent); color: var(--text); }
 
 .note {
   text-align: center;
@@ -235,198 +221,203 @@ body {
 <body>
 
 <div class="container">
-
-  <!-- FORM -->
   <div id="formSection">
     <div class="header">
-      <h1>리포트 읽어주셔서 감사합니다</h1>
+      <h1>읽어주셔서 감사합니다</h1>
       <p>
-        이 리포트가 실제로 도움이 되려면, 읽는 분의 시각이 반영되어야 합니다.<br>
-        솔직하게 답해주시면 더 날카로운 버전으로 업데이트하겠습니다.<br>
-        1분이면 충분합니다.
+        이 자료가 진짜 쓸모 있으려면 읽는 분의 솔직한 반응이 필요합니다.<br>
+        부담 없이 골라주세요. 1분이면 됩니다.
       </p>
     </div>
 
-    <!-- Q1 -->
+    <!-- SECTION A: 내용 -->
+    <div class="divider">내용에 대해</div>
+
     <div class="question">
-      <div class="q-number">QUESTION 01</div>
-      <div class="q-title">리포트를 읽고 난 첫 느낌은?</div>
+      <div class="q-number">01</div>
+      <div class="q-title">첫 느낌이 어땠나요?</div>
       <div class="options" data-name="q1">
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q1" value="내 상황을 정확히 짚었다">
-          <div class="radio-dot"></div>
-          <span>내 상황을 정확히 짚었다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q1" value="상황을 정확히 짚었다">
+          <div class="radio-dot"></div><span>상황을 정확히 짚었다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
+        <label class="option" onclick="sel(this)">
           <input type="radio" name="q1" value="방향은 맞는데 디테일이 다른 부분이 있다">
-          <div class="radio-dot"></div>
-          <span>방향은 맞는데 디테일이 다른 부분이 있다</span>
+          <div class="radio-dot"></div><span>방향은 맞는데 디테일이 다른 부분이 있다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
+        <label class="option" onclick="sel(this)">
           <input type="radio" name="q1" value="핵심을 놓친 것 같다">
-          <div class="radio-dot"></div>
-          <span>핵심을 놓친 것 같다</span>
+          <div class="radio-dot"></div><span>핵심을 놓친 것 같다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
+        <label class="option" onclick="sel(this)">
           <input type="radio" name="q1" value="아직 판단이 안 선다">
-          <div class="radio-dot"></div>
-          <span>아직 판단이 안 선다</span>
+          <div class="radio-dot"></div><span>아직 판단이 안 선다</span>
         </label>
       </div>
     </div>
 
-    <!-- Q2 -->
     <div class="question">
-      <div class="q-number">QUESTION 02</div>
-      <div class="q-title">지금 가장 급한 건 뭔가요?</div>
-      <div class="q-subtitle">현재 머릿속에서 가장 큰 비중을 차지하는 것</div>
+      <div class="q-number">02</div>
+      <div class="q-title">읽으면서 가장 오래 멈춘 파트는?</div>
+      <div class="q-subtitle">스크롤을 멈추고 다시 읽은 부분이요</div>
       <div class="options" data-name="q2">
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q2" value="당장의 경영 (회사가 돌아가야 하니까)">
-          <div class="radio-dot"></div>
-          <span>당장의 경영 (회사가 돌아가야 하니까)</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q2" value="타임라인/이해관계자 맵">
+          <div class="radio-dot"></div><span>타임라인 / 이해관계자 맵</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q2" value="PE와의 협상/합의 조건">
-          <div class="radio-dot"></div>
-          <span>PE와의 협상/합의 조건</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q2" value="재무/밸류에이션 숫자">
+          <div class="radio-dot"></div><span>재무 / 밸류에이션 숫자</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q2" value="깔끔하게 나가는 것">
-          <div class="radio-dot"></div>
-          <span>깔끔하게 나가는 것</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q2" value="게임이론/전략 구조">
+          <div class="radio-dot"></div><span>게임이론 / 전략 구조</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q2" value="김규현/자문사 문제 정리">
-          <div class="radio-dot"></div>
-          <span>김규현/자문사 문제 정리</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q2" value="김규현 자문사 쟁점">
+          <div class="radio-dot"></div><span>김규현 자문사 쟁점</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q2" value="나간 후의 다음 챕터">
-          <div class="radio-dot"></div>
-          <span>나간 후의 다음 챕터</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q2" value="체크리스트/실행 계획">
+          <div class="radio-dot"></div><span>체크리스트 / 실행 계획</span>
+        </label>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q2" value="딱히 멈춘 곳이 없다">
+          <div class="radio-dot"></div><span>딱히 멈춘 곳이 없다</span>
         </label>
       </div>
     </div>
 
-    <!-- Q3 -->
+    <!-- SECTION B: 전달 방식 -->
+    <div class="divider">전달 방식에 대해</div>
+
     <div class="question">
-      <div class="q-number">QUESTION 03</div>
-      <div class="q-title">리포트에서 "이건 좀 다른데"라고 느낀 부분이 있었나요?</div>
-      <div class="q-subtitle">사실관계, 수치, 상황 판단 등 뭐든</div>
+      <div class="q-number">03</div>
+      <div class="q-title">분량은 어땠나요?</div>
       <div class="options" data-name="q3">
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q3" value="없다. 대체로 맞다">
-          <div class="radio-dot"></div>
-          <span>없다. 대체로 맞다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q3" value="적당했다">
+          <div class="radio-dot"></div><span>적당했다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q3" value="사소한 부분이 좀 다르다">
-          <div class="radio-dot"></div>
-          <span>사소한 부분이 좀 다르다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q3" value="좀 길었다. 핵심만 짧게 봤으면">
+          <div class="radio-dot"></div><span>좀 길었다. 핵심만 짧게 봤으면</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q3" value="중요한 부분이 다르다">
-          <div class="radio-dot"></div>
-          <span>중요한 부분이 다르다</span>
-        </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q3" value="리포트에 없는 중요한 사실이 있다">
-          <div class="radio-dot"></div>
-          <span>리포트에 없는 중요한 사실이 있다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q3" value="오히려 더 깊이 들어갔으면">
+          <div class="radio-dot"></div><span>오히려 더 깊이 들어갔으면</span>
         </label>
       </div>
     </div>
 
-    <!-- Q4 -->
     <div class="question">
-      <div class="q-number">QUESTION 04</div>
-      <div class="q-title">전략 방향에 대해 어떻게 생각하세요?</div>
-      <div class="q-subtitle">"핵 옵션 신뢰도 유지 + 조건부 엑시트" 전략</div>
+      <div class="q-number">04</div>
+      <div class="q-title">이해하기 어려운 부분이 있었나요?</div>
+      <div class="q-subtitle">용어, 구조, 숫자 등 뭐든</div>
       <div class="options" data-name="q4">
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q4" value="현실적이다. 이 방향으로 가고 싶다">
-          <div class="radio-dot"></div>
-          <span>현실적이다. 이 방향으로 가고 싶다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q4" value="없었다. 읽기 편했다">
+          <div class="radio-dot"></div><span>없었다. 읽기 편했다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q4" value="방향은 맞는데 실행이 어려운 부분이 있다">
-          <div class="radio-dot"></div>
-          <span>방향은 맞는데 실행이 어려운 부분이 있다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q4" value="용어가 좀 어려웠다">
+          <div class="radio-dot"></div><span>용어가 좀 어려웠다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q4" value="나는 다른 방향을 생각하고 있다">
-          <div class="radio-dot"></div>
-          <span>나는 다른 방향을 생각하고 있다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q4" value="숫자/계산이 한눈에 안 들어왔다">
+          <div class="radio-dot"></div><span>숫자/계산이 한눈에 안 들어왔다</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q4" value="아직 모르겠다">
-          <div class="radio-dot"></div>
-          <span>아직 모르겠다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q4" value="전체 논리 흐름이 좀 복잡했다">
+          <div class="radio-dot"></div><span>전체 논리 흐름이 좀 복잡했다</span>
         </label>
       </div>
     </div>
 
-    <!-- Q5 -->
     <div class="question">
-      <div class="q-number">QUESTION 05</div>
-      <div class="q-title">SHA(주주간계약서) 내용을 알고 계신가요?</div>
-      <div class="q-subtitle">리포트의 거의 모든 전략이 이 문서에 달려있습니다</div>
+      <div class="q-number">05</div>
+      <div class="q-title">이 자료를 누군가에게 공유하고 싶다면, 어떤 형태가 좋을까요?</div>
       <div class="options" data-name="q5">
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q5" value="정확히 알고 있다. 공유 가능">
-          <div class="radio-dot"></div>
-          <span>정확히 알고 있다. 공유 가능</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q5" value="지금 이 웹 형태 그대로">
+          <div class="radio-dot"></div><span>지금 이 웹 형태 그대로</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q5" value="대략 알지만 세부 조항은 확인 필요">
-          <div class="radio-dot"></div>
-          <span>대략 알지만 세부 조항은 확인 필요</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q5" value="핵심만 담은 1장짜리 요약">
+          <div class="radio-dot"></div><span>핵심만 담은 1장짜리 요약</span>
         </label>
-        <label class="option" onclick="selectOption(this)">
-          <input type="radio" name="q5" value="잘 모른다">
-          <div class="radio-dot"></div>
-          <span>잘 모른다</span>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q5" value="PDF 파일">
+          <div class="radio-dot"></div><span>PDF 파일</span>
+        </label>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q5" value="슬라이드(발표용)">
+          <div class="radio-dot"></div><span>슬라이드 (발표용)</span>
+        </label>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q5" value="공유할 생각은 없다">
+          <div class="radio-dot"></div><span>공유할 생각은 없다</span>
         </label>
       </div>
     </div>
 
-    <!-- Q6: Open -->
+    <!-- SECTION C: 액션 -->
+    <div class="divider">앞으로에 대해</div>
+
     <div class="question">
-      <div class="q-number">QUESTION 06</div>
-      <div class="q-title">리포트에 안 담긴 이야기가 있다면, 여기에 자유롭게 적어주세요</div>
+      <div class="q-number">06</div>
+      <div class="q-title">이 자료를 읽고 실제로 뭔가 하고 싶어졌나요?</div>
+      <div class="options" data-name="q6">
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q6" value="당장 행동으로 옮길 것이 보였다">
+          <div class="radio-dot"></div><span>당장 행동으로 옮길 것이 보였다</span>
+        </label>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q6" value="생각이 정리됐다. 바로 움직이진 않지만">
+          <div class="radio-dot"></div><span>생각이 정리됐다. 바로 움직이진 않지만</span>
+        </label>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q6" value="읽은 건 좋은데 뭘 먼저 해야 할지 모르겠다">
+          <div class="radio-dot"></div><span>읽은 건 좋은데 뭘 먼저 해야 할지 모르겠다</span>
+        </label>
+        <label class="option" onclick="sel(this)">
+          <input type="radio" name="q6" value="아직 와닿지 않는다">
+          <div class="radio-dot"></div><span>아직 와닿지 않는다</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-number">07</div>
+      <div class="q-title">이 자료에서 빠졌다고 느낀 것, 다르다고 느낀 것, 또는 하고 싶은 말이 있다면</div>
       <div class="q-subtitle">
-        "사실 이런 사정이 있다", "이 부분은 좀 다르다", "이건 꼭 알아야 하는데" — 뭐든 괜찮습니다.<br>
-        적어주신 내용은 리포트 업데이트에만 사용됩니다.
+        뭐든 괜찮습니다. "사실 이런 사정이 있다", "이건 좀 다르다", "이런 것도 다뤄줬으면" — 편하게 적어주세요.
       </div>
       <div class="textarea-wrap">
-        <textarea id="q6" placeholder="편하게 적어주세요. 길어도 괜찮고, 짧아도 괜찮습니다."></textarea>
+        <textarea id="q7" placeholder="짧아도 괜찮고, 길어도 괜찮습니다."></textarea>
       </div>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="submitForm()">의견 전달하기</button>
-
+    <button class="submit-btn" onclick="submitForm()">보내기</button>
     <div class="note">
-      답변은 리포트 작성자에게만 전달됩니다.<br>
-      외부에 공유되지 않습니다.
+      답변은 리포트 작성자에게만 전달됩니다.<br>외부에 공유되지 않습니다.
     </div>
   </div>
 
   <!-- THANK YOU -->
   <div class="thankyou" id="thankyouSection">
-    <div class="icon">&#10004;</div>
+    <div style="font-size:48px;margin-bottom:24px">&#10004;</div>
     <h2>감사합니다</h2>
     <p>
-      의견 확인하고 리포트에 반영하겠습니다.<br>
+      답변 확인하고 반영하겠습니다.<br>
       업데이트되면 같은 링크에서 확인하실 수 있습니다.
     </p>
     <a href="index.html" class="back-link">리포트로 돌아가기</a>
   </div>
-
 </div>
 
 <script>
-function selectOption(el) {
+function sel(el) {
   const parent = el.closest('.options');
   parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
@@ -434,31 +425,37 @@ function selectOption(el) {
 }
 
 function submitForm() {
+  const labels = {
+    q1: '첫 느낌',
+    q2: '가장 오래 멈춘 파트',
+    q3: '분량',
+    q4: '이해 난이도',
+    q5: '공유 형태',
+    q6: '행동 의지',
+    q7: '자유 의견'
+  };
   const answers = {};
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     const checked = document.querySelector(`input[name="q${i}"]:checked`);
     answers[`q${i}`] = checked ? checked.value : '(미응답)';
   }
-  answers.q6 = document.getElementById('q6').value || '(미응답)';
+  answers.q7 = document.getElementById('q7').value || '(미응답)';
 
-  // Store in localStorage as simple persistence
   const timestamp = new Date().toISOString();
   const entry = { timestamp, ...answers };
+  let list = JSON.parse(localStorage.getItem('report_feedback') || '[]');
+  list.push(entry);
+  localStorage.setItem('report_feedback', JSON.stringify(list));
 
-  let feedbackList = JSON.parse(localStorage.getItem('boostlab_feedback') || '[]');
-  feedbackList.push(entry);
-  localStorage.setItem('boostlab_feedback', JSON.stringify(feedbackList));
-
-  // Also copy to clipboard for easy retrieval
-  const text = Object.entries(answers).map(([k, v]) => `${k}: ${v}`).join('\n');
+  const text = Object.entries(answers)
+    .map(([k, v]) => `[${labels[k]}] ${v}`)
+    .join('\n');
   navigator.clipboard.writeText(text).catch(() => {});
 
-  // Show thank you
   document.getElementById('formSection').style.display = 'none';
   document.getElementById('thankyouSection').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
-
 </body>
 </html>
