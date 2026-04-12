@@ -481,21 +481,18 @@ function submitForm() {
   const timestamp = new Date().toISOString();
   const entry = { timestamp, ...answers };
 
-  // Send to Google Sheets via Apps Script
-  const scriptUrl = localStorage.getItem('feedback_script_url');
-  if (scriptUrl) {
-    fetch(scriptUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(entry)
-    }).catch(() => {});
-  }
-
-  // Also save locally + clipboard as backup
-  let list = JSON.parse(localStorage.getItem('report_feedback') || '[]');
-  list.push(entry);
-  localStorage.setItem('report_feedback', JSON.stringify(list));
+  // Send to Telegram
+  const tg = {
+    token: '8435759242:AAGaRidfaQsYCjtXnu1l1_Jhg1fDWAKX-Rw',
+    chatId: '941914952'
+  };
+  const msg = `📋 새 피드백 도착\n\n`
+    + Object.entries(answers).map(([k,v]) => `[${labels[k]}]\n${v}`).join('\n\n');
+  fetch(`https://api.telegram.org/bot${tg.token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: tg.chatId, text: msg })
+  }).catch(() => {});
 
   const text = Object.entries(answers)
     .map(([k, v]) => `[${labels[k]}] ${v}`)
