@@ -389,12 +389,48 @@ body {
 
     <div class="question">
       <div class="q-number">07</div>
+      <div class="q-title">다음 버전에 더 담겼으면 하는 내용이 있나요?</div>
+      <div class="q-subtitle">여러 개 골라도 됩니다</div>
+      <div class="options" data-name="q7" data-multi="true">
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="실제 비슷한 사례에서 어떻게 끝났는지 (판례/선례)">
+          <div class="radio-dot"></div><span>실제 비슷한 사례에서 어떻게 끝났는지 (판례/선례)</span>
+        </label>
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="변호사/회계사에게 요청할 구체적 질문 리스트">
+          <div class="radio-dot"></div><span>변호사/회계사에게 요청할 구체적 질문 리스트</span>
+        </label>
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="협상 시 실제로 쓸 수 있는 멘트/스크립트">
+          <div class="radio-dot"></div><span>협상 시 실제로 쓸 수 있는 멘트/스크립트</span>
+        </label>
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="나간 후 다음 사업에 대한 시나리오">
+          <div class="radio-dot"></div><span>나간 후 다음 사업에 대한 시나리오</span>
+        </label>
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="PE 내부 사정/의사결정 구조에 대한 더 깊은 분석">
+          <div class="radio-dot"></div><span>PE 내부 사정/의사결정 구조에 대한 더 깊은 분석</span>
+        </label>
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="감정/멘탈 관리에 대한 구체적 가이드">
+          <div class="radio-dot"></div><span>감정/멘탈 관리에 대한 구체적 가이드</span>
+        </label>
+        <label class="option" onclick="toggleMulti(this)">
+          <input type="checkbox" name="q7" value="지금 내용으로 충분하다">
+          <div class="radio-dot"></div><span>지금 내용으로 충분하다</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-number">08</div>
       <div class="q-title">이 자료에서 빠졌다고 느낀 것, 다르다고 느낀 것, 또는 하고 싶은 말이 있다면</div>
       <div class="q-subtitle">
         뭐든 괜찮습니다. "사실 이런 사정이 있다", "이건 좀 다르다", "이런 것도 다뤄줬으면" — 편하게 적어주세요.
       </div>
       <div class="textarea-wrap">
-        <textarea id="q7" placeholder="짧아도 괜찮고, 길어도 괜찮습니다."></textarea>
+        <textarea id="q8" placeholder="짧아도 괜찮고, 길어도 괜찮습니다."></textarea>
       </div>
     </div>
 
@@ -424,6 +460,12 @@ function sel(el) {
   el.querySelector('input').checked = true;
 }
 
+function toggleMulti(el) {
+  el.classList.toggle('selected');
+  const cb = el.querySelector('input[type="checkbox"]');
+  cb.checked = el.classList.contains('selected');
+}
+
 function submitForm() {
   const labels = {
     q1: '첫 느낌',
@@ -432,14 +474,17 @@ function submitForm() {
     q4: '이해 난이도',
     q5: '공유 형태',
     q6: '행동 의지',
-    q7: '자유 의견'
+    q7: '더 다뤄줬으면 하는 내용',
+    q8: '자유 의견'
   };
   const answers = {};
   for (let i = 1; i <= 6; i++) {
     const checked = document.querySelector(`input[name="q${i}"]:checked`);
     answers[`q${i}`] = checked ? checked.value : '(미응답)';
   }
-  answers.q7 = document.getElementById('q7').value || '(미응답)';
+  const q7checks = document.querySelectorAll('input[name="q7"]:checked');
+  answers.q7 = q7checks.length > 0 ? Array.from(q7checks).map(c => c.value).join(', ') : '(미응답)';
+  answers.q8 = document.getElementById('q8').value || '(미응답)';
 
   const timestamp = new Date().toISOString();
   const entry = { timestamp, ...answers };
